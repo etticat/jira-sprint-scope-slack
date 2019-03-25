@@ -21,7 +21,7 @@ app.post('/jira-issue-added-to-sprint', function(req, res) {
 
   let sprintChanged = changelog.items.find(item => item.field === "Sprint")
 
-  let addedToActiveSprint = sprintChangedToActiveSprint(issue.fields.customfield_10016)
+  let addedToActiveSprint = sprintChangedToActiveSprint(issue.fields.customfield_10021)
 
   if (!sprintChanged) {
 
@@ -49,11 +49,6 @@ app.post('/jira-issue-added-to-sprint', function(req, res) {
             {
               title: "Type",
               value: `${issue.fields.issuetype.name}`,
-              short: true
-            },
-            {
-              title: "Story Points",
-              value: `${issue.fields.customfield_10021}`,
               short: true
             },
             {
@@ -100,18 +95,15 @@ app.post('/jira-issue-added-to-sprint', function(req, res) {
   */
   function sprintChangedToActiveSprint(sprints) {
     // its possible there are no sprints
-    
-    console.log(sprints)
+   
     
     if (!sprints) {
       return false
     }
 
-    console.log("----")
   
     for (let i=0; i < sprints.length; i++) {
 
-      console.log(sprints[i])
       if (sprints[i].includes('state=ACTIVE')) {
         return true
       } else if (i === sprints.length - 1) {
