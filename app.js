@@ -23,6 +23,8 @@ app.post('/jira-issue-added-to-sprint', function(req, res) {
 
   let addedToActiveSprint = sprintChangedToActiveSprint(issue.fields.customfield_10016)
 
+  console.log(issue)
+  
   if (!sprintChanged) {
 
     console.log('No Sprint change')
